@@ -1,0 +1,79 @@
+{% extends "base2.html" %}
+{% comment '기본 html'%}
+  {% extends "base1.html" %} : 상위 폼.  첫줄에 구현해야 함 
+  block content  : base1.html 의 {block content}을 대체
+{% endcomment%}
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<title>{% block title %}로그인{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+{{msg}}
+<div class="w3-container w3-center">
+  <h2>더 많은 혜택을 받으려면?</h2>
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black w3-large">로그인</button>
+  <hr>
+  <h4>회원이 아니신가요?</h4>
+  <button onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-white w3-large">회원 가입</button>
+  <button onclick="location.href='../join/'" class="w3-button w3-grey w3-large">비회원</button>
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+    <div class="w3-center"><br>
+      <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+      <h2 style="color:black">로그인</h2>
+    </div>
+<form class="w3-container" action="../login/" method="post" name="f">
+{% csrf_token %}
+  <div class="w3-section" style="color:black">
+    <label><b>아이디</b></label>
+    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="id" required>
+    <label><b>비밀번호</b></label>
+    <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="pass" required>
+    <button class="w3-button w3-block w3-black w3-section w3-padding" type="submit">Login</button>
+</form>
+<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+  <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+</div>
+</div>
+</div>
+</div>
+
+<div id="id02" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+    <div class="w3-center"><br>
+      <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+      <h2 style="color:black">회원가입</h2>
+{% comment %}       <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> {% endcomment %}
+    </div>
+   <form class="w3-container" action="../join/" name="f" method="post">
+{%  csrf_token  %}
+<input type="hidden" name="picture" value="" >
+<table style="color:black"><tr><td rowspan="4" valign="bottom">
+ <img src="" width="100" height="120" id="pic"><br>
+<font size="1"><a href="javascript:win_upload()">사진등록</a></font>
+</td><th>아이디</th><td><input type="text" name="id"></td></tr>
+<tr><th>비밀번호</th><td><input type="password" name="pass"></td></tr>
+<tr><th>이름</th><td><input type="text" name="name"></td></tr>
+<tr><th>성별</th>
+   <td><input type="radio" name="gender" value="1" checked>남
+       <input type="radio" name="gender" value="2">여</td></tr>
+<tr><th>전화번호</th>
+  <td colspan="2"><input type="text" name="tel"></td></tr>
+<tr><th>이메일</th>
+  <td colspan="2"><input type="text" name="email"></td></tr>
+<tr><td colspan="3"><input type="submit" value="회원가입"></td></tr>
+</table></form>
+
+    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+      <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+    </div>
+
+  </div>
+</div>
+</div>
+
+{% endblock %}
+</body></html>

@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Main Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+
+<style>
+  #fas:hover{
+    <i class='fas fa-angle-left' style='font-size:48px;color:red'></i>
+  }
+
+  .swiper-pagination-bullet { 
+    width: 12px; 
+    height: 12px; 
+    background: transparent; 
+    border: 1px solid black; 
+    opacity: 1; }
+
+  .swiper-pagination-bullet-active { 
+    width: 40px; 
+    transition: width .5s; 
+    border-radius: 5px; 
+    background: black; 
+    border: 1px solid transparent; }
+ 
+  .swiper-button-next {
+    background: no-repeat;
+    background-size: 50% auto;
+    background-position: center;
+}
+
+.swiper-button-prev {
+  background:  no-repeat;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+}
+  .swiper-container {
+    width:100%;
+    height:100%;
+    border:2px solid black;
+    border-radius:7px;
+    box-shadow:0 0 20px #ccc inset;
+}
+.swiper-slide {
+    text-align:center;
+    display:flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
+    align-items:center; /* 위아래 기준 중앙정렬 */
+    justify-content:center; /* 좌우 기준 중앙정렬 */
+}
+{% comment %} .swiper-slide img {
+   box-shadow:0 0 5px #555;
+} {% endcomment %}
+
+
+</style>
+<body class="w3-content" style="max-width:1300px">
+
+<!-- First Grid: Logo & About -->
+<div class="w3-row">
+  <div class="w3-half w3-black w3-container w3-center" style="height:700px">
+    <div class="w3-padding-64">
+      <h1>EZ ORDER</h1>
+    </div>
+    <div class="w3-padding-64">
+      <a href="#HOME" class="w3-button w3-black w3-block w3-hover-blue-grey w3-padding-16">HOME</a>
+      <a href="#bever" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">BEVERAGE</a>
+      <a href="#food" class="w3-button w3-black w3-block w3-hover-dark-grey w3-padding-16">FOOD</a>
+      <a href="#goods" class="w3-button w3-black w3-block w3-hover-brown w3-padding-16">GOODS</a>
+      <a href="#contact" class="w3-button w3-black w3-block w3-hover-brown w3-padding-16">CONTACT</a>
+    </div>
+  </div>
+  <div id="HOME" class="w3-half w3-dark-grey w3-container" style="height:700px">
+    <div class="w3-padding-64 w3-center">
+      <h1>SIGN IN</h1>
+     {% comment %}  <img src="/w3images/avatar3.png" class="w3-margin w3-circle" alt="Person" style="width:50%"> {% endcomment %}
+      <div class="w3-left-align w3-padding-large">
+        {% block content %} {% endblock %}
+      </div>
+    </div>
+  </div>
+
+<!-- Second Grid: Work & Resume -->
+<div class="w3-row">
+  <div class="w3-half w3-grey w3-center" style="min-height:800px" id="bever">
+    <div class="w3-padding-64 w3-center">
+      <h2>BEVERAGE</h2>
+      <p>ALWAYS BESIDE YOU, EZ COFFEE</p>
+    </div>
+    <div class="w3-row">
+      <div class="w3-half swiper-container swiper1" >
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="/menu/main" style="text-decoration-line : none">
+             <img src="https://ediya.com/files/menu/IMG_1647320805422.png"  style="cursor:pointer; width:100%">
+            </a>
+             <a href="/menu/main" style="text-decoration-line : none">
+                <p style="cursor:pointer;font-weight:900">COFFEE</p>
+             </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="/menu/main" style="text-decoration-line : none">
+            <img src="https://www.ediya.com/files/menu/IMG_1647322011235.png" style="cursor:pointer; width:100%" >
+            </a>
+            <a href="/menu/main" style="text-decoration-line : none">
+              <p style="cursor:pointer; font-weight:900">LATTE & TEA</p>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="/menu/main" style="text-decoration-line : none">
+              <img src="https://ediya.com/files/menu/IMG_1647322413547.png" style="cursor:pointer; width:100%">
+            </a>
+            <a href="/menu/main" style="text-decoration-line : none">
+              <p style="cursor:pointer; font-weight:900">ADE & SHAKE</p>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="/menu/main" style="text-decoration-line : none">
+              <img src="https://ediya.com/files/menu/IMG_1647322184521.png" style="cursor:pointer; width:100%">
+            </a>
+            <a href="/menu/main" style="text-decoration-line : none">
+              <p style="cursor:pointer; font-weight:900">FLATCCINO</p>
+            </a>
+          </div>
+      </div>
+        <div class="swiper-button-next"><i id="fas" class='fas fa-angle-right' style='font-size:36px'></i></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+        <div id="fas" class="swiper-button-prev"><i class='fas fa-angle-left' style='font-size:36px'></i></div><!-- 이전 버튼 -->
+        <div class="swiper1-pagination"></div>
+    </div>
+    <br>
+  </div>
+</div>
+
+  <div class="w3-half w3-white w3-center w3-container" style="min-height:800px" id="food">
+    <div class="w3-padding-64 w3-center">
+      <h2>FOOD</h2>
+      <p>ALWAYS BESIDE YOU, EZ FOOD.</p>
+    </div>
+    <div class="w3-row">
+      <div class="w3-half swiper-container swiper2">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="/menu/main" style="text-decoration-line : none">
+             <img src="https://ediya.com/files/menu/IMG_1548049712448.png"  style="cursor:pointer; width:100%">
+            </a>
+            <a href="/menu/main" style="text-decoration-line : none">
+             <p style="cursor:pointer; font-weight:900">BREAD</p>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="/menu/main" style="text-decoration-line : none">
+              <img src="https://ediya.com/files/menu/IMG_1641945771372.png" style="cursor:pointer; width:100%" >
+            </a>
+            <a href="/menu/main" style="text-decoration-line : none">
+              <p style="cursor:pointer; font-weight:900">DESSERT</p>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="/menu/main" style="text-decoration-line : none">
+              <img src="https://ediya.com/files/menu/IMG_1527143944548.png" style="cursor:pointer; width:100%">
+            </a>
+            <a href="/menu/main" style="text-decoration-line : none">
+              <p style="cursor:pointer; font-weight:900">CAKE</p>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="/menu/main" style="text-decoration-line : none">
+              <img src="https://ediya.com/files/menu/IMG_1535034343110.png" style="cursor:pointer; width:100%">
+            </a>
+            <a href="/menu/main" style="text-decoration-line : none">
+              <p style="cursor:pointer; font-weight:900">RTE</p>
+            </a>
+          </div>
+      </div>
+        <div class="swiper-button-next"><i class='fas fa-angle-right' style='font-size:36px;'></i></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+        <div class="swiper-button-prev"><i class='fas fa-angle-left' style='font-size:36px'></i></div><!-- 이전 버튼 -->
+        <div class="swiper2-pagination"></div>
+    </div>
+    <br>
+  </div>
+</div>
+
+
+<!-- Third Grid: Swing By & Contact -->
+<div class="w3-row" id="goods">
+  <div class="w3-half w3-dark-grey w3-center" style="min-height:700px" id="bever">
+    <div class="w3-padding-64">
+      <h2>GOODS</h2>
+      <p>ALWAYS BESIDE YOU, EZ GOODS</p>
+    </div>
+    <div class="w3-row">
+      <div class="w3-half">
+        <img src="https://ediya.com/files/menu/IMG_1644303556634.png" style="cursor:pointer; width:60%">
+        <p style="cursor:pointer; font-weight:900">TUMBLER</p>
+      </div>
+      <div class="w3-half">
+        <img src="https://ediya.com/files/menu/IMG_1622015786420.png" style="cursor:pointer; width:60%" >
+        <p style="cursor:pointer; font-weight:900">CUP</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="w3-half w3-black w3-container" style="height:700px" id="contact">
+    <div class="w3-padding-64 w3-padding-large" >
+      <h1>Contact</h1>
+      <p class="w3-opacity">GET IN TOUCH</p>
+      <form class="w3-container w3-card w3-padding-32 w3-white" action="/action_page.php" target="_blank">
+        <div class="w3-section">
+          <label>Name</label>
+          <input class="w3-input" style="width:100%;" type="text" required name="Name">
+        </div>
+        <div class="w3-section">
+          <label>Email</label>
+          <input class="w3-input" style="width:100%;" type="text" required name="Email">
+        </div>
+        <div class="w3-section">
+          <label>Message</label>
+          <input class="w3-input" style="width:100%;" type="text" required name="Message">
+        </div>
+        <button type="submit" class="w3-button w3-black w3-right">Send</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-grey w3-padding-16">
+  <p>Powered by <a href="#HOME" target="_blank">EZ ORDER</a></p>
+</footer>
+
+</body>
+
+<script>
+// swiper1
+new Swiper('.swiper1', {
+  loop: true,
+   pagination : { // 페이징 설정
+      el : '.swiper1-pagination',
+      clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+
+   },
+   autoplay: {
+    delay: 3000,
+  },
+   navigation : { // 네비게이션 설정
+      nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+      prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+   },
+});
+
+// swiper2
+new Swiper('.swiper2', {
+   loop : true, // 무한 루프 슬라이드, 반복이 되며 슬라이드가 끝이 없다.
+   pagination : {
+      el : '.swiper2-pagination',
+   },
+   autoplay: {
+    delay: 3000,
+  },
+  navigation : { // 네비게이션 설정
+      nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+      prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+   },
+});
+
+</script>
+</html>

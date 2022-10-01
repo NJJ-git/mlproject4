@@ -1,0 +1,19 @@
+{% extends "base2.html" %}
+{% block content %}
+
+{# 한줄 주석 표현 #}
+{% if request.session.login %} {# 로그인 된 경우 #}
+<div class="w3-panel w3-card">
+<h3>{{request.session.login}}로 로그인 되었습니다.</h3>
+<h3><a href="../logout">로그아웃</a></h3>
+<h3><a href="../info/{{request.session.login}}/">회원정보보기</a></h3>
+{% if request.session.login == 'admin'%}  {# 관리자로 로그인 된 경우 #}
+    <h3><a href="../list" >회원목록 보기</a></h3>
+{% endif %}
+</div>
+{% else %} {# 로그인 안된 경우 #}
+<script>
+   location.href='../login/'
+</script>
+{% endif %}
+{% endblock content %}
