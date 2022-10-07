@@ -10,6 +10,8 @@ voice 폴더에 urls.py
 from django.urls import path
 from . import views
 urlpatterns = [
+    path('',views.main,name='main'),
     path('main/', views.main, name='main'),
+    path('logout/', views.logout, name='logout'),
     
 ]

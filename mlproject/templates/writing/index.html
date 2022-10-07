@@ -1,0 +1,66 @@
+
+{% block title %}필기인식{% endblock %}
+
+{% block content %}
+<div style="padding-bottom:15px;width:98%;">
+    <!-- <span style="font-weight: bold;">서명 후 우측 하단의 '저장' 버튼을 클릭해주세요.</span> -->
+    <br />
+    <canvas id="canvas" width="300" height="150" style="position: relative; border: 1px solid #000;"></canvas>
+        <img id="myImage" style="display: none; background:black"/>
+        <br />
+        <a href="#" onclick="onClear();">지우기</a>
+        <a href="" onclick="alertOnSave(this);" download="mnist.png">저장</a>
+</div>
+
+<script type="text/javascript">
+let canvas = document.getElementById('canvas');
+c = canvas.getContext('2d');
+c.fillStyle = '#fff'; 
+c.fillRect(0, 0, canvas.width, canvas.height);
+c.fillStyle = '#000'; 
+
+//c.fillStyle = 'black'; 
+
+function onClear() {
+     canvas =  document.getElementById('canvas');
+     c.save();
+     c.setTransform(1, 0, 0, 1, 0, 0);
+     c.clearRect(0, 0, canvas.width, canvas.height);
+     c.restore();
+}
+
+
+function draw(x, y) {
+  if (isDrawing) {
+    c.beginPath();
+    c.arc(x, y, 10, 0, Math.PI*2);
+    c.closePath();
+    c.fill();
+  }
+}
+
+
+canvas.addEventListener('mousemove', event =>
+  draw(event.offsetX, event.offsetY)
+);
+canvas.addEventListener('mousedown', () => isDrawing = true);
+
+canvas.addEventListener('mouseup', () => isDrawing = false);
+
+function alertOnSave(a){
+    a.href = document.getElementById("canvas").toDataURL("image/png").replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    $.ajax({
+	 type : 'post',
+	 url : '/mnist/upload',
+	 cache: false,
+	 data: {data:document.getElementById("canvas").toDataURL("image/png")},
+	 success : function (data) {
+                 a.href = document.getElementById("canvas").toDataURL("image/png").replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+	 },
+	error: function(error) {
+		console.log(error);
+	}
+    });    
+}
+</script>
+{% endblock %}

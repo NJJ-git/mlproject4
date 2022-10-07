@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EZ ORDER</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1,h2,h3,h4,h5,h6 {
+    font-family: "Montserrat", sans-serif
+}
+.w3-row-padding img {
+    margin-bottom: 12px
+}
+
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {
+    width: 120px;background: #222;
+}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+
+#main {
+    margin-left: 120px
+}
+/* Remove margins from "page content" on small screens */
+
+@media only screen and (max-width: 600px) {
+    #main {margin-left: 0}
+}
+
+</style>
+</head>
+<body class="w3-black">
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  {% if request.session.login %}
+<h6>{{request.session.login}}님 ㅎㅇ</h6>
+    {% else %}
+    <h3>비회원 입니다.</h3>
+    {% endif %}
+  <a href="/menu/main" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+{% comment %}   <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>ABOUT</p>
+  </a>
+  <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-eye w3-xxlarge"></i>
+    <p>PHOTOS</p>
+  </a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a> {% endcomment %}
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+{% comment %}     <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+    <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
+    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a> {% endcomment %}
+  </div>
+</div>
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small">EZ</span> ORDER</h1>
+    <p>ALWAYS BESIDE YOU, EZ ORDER.</p>
+    <img src="https://ediya.com/files/menu/IMG_1661754198118.png" alt="메뉴사진" class="w3-image" width="300" height="300"> <!--메뉴 사진-->
+  </header> 
+
+  <!-- About Section -->
+  <div class="w3-content w3-center w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">연유밀크티</h2> <!--메뉴 이름-->
+    <hr class="w3-opacity">
+    <p>
+        연유의 달콤함과 묵직하고 부드러운 밀크티 크림의 은은한 향미를 밸런스 있게 느낄 수 있는 음료
+    </p><!--메뉴 설명-->
+  
+    <hr class="w3-opacity">
+    <h4 class="w3-text-light-grey">수량 체크</h4>
+    <p>
+        {% block content %}
+        <div style="padding-bottom:15px;width:98%;">
+            <!-- <span style="font-weight: bold;">서명 후 우측 하단의 '저장' 버튼을 클릭해주세요.</span> -->
+            <br />
+            <canvas id="canvas" width="200" height="100" style="position: relative; border: 1px solid #000;"></canvas>
+                <img id="myImage" style="display: none; background:black"/>
+                <br />
+                <button ><a href="/writing/order" style="text-decoration:none;" onclick="onClear();">지우기</a></button>
+                <button><a href="" onclick="alertOnSave(this);" download="mnist.png" style="text-decoration:none;">확인</a></button>
+        </div>
+    </p>
+  
+    <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">acorn</a></p>
+  <!-- End footer -->
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+
+<script type="text/javascript">
+    let canvas = document.getElementById('canvas');
+    c = canvas.getContext('2d');
+    c.fillStyle = '#fff'; 
+    c.fillRect(0, 0, canvas.width, canvas.height);
+    c.fillStyle = '#000'; 
+    
+    //c.fillStyle = 'black'; 
+    
+    function onClear() {
+         canvas =  document.getElementById('canvas');
+         c.save();
+         c.setTransform(1, 0, 0, 1, 0, 0);
+         c.clearRect(0, 0, canvas.width, canvas.height);
+         c.restore();
+    }
+    
+    
+    function draw(x, y) {
+      if (isDrawing) {
+        c.beginPath();
+        c.arc(x, y, 3, 0, Math.PI*2,);
+        c.closePath();
+        c.fill();
+      }
+    }
+    
+    
+    canvas.addEventListener('mousemove', event =>
+      draw(event.offsetX, event.offsetY)
+    );
+    canvas.addEventListener('mousedown', () => isDrawing = true);
+    
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    
+    function alertOnSave(a){
+        a.href = document.getElementById("canvas").toDataURL("image/png").replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+        $.ajax({
+         type : 'post',
+         url : '/mnist/upload',
+         cache: false,
+         data: {data:document.getElementById("canvas").toDataURL("image/png")},
+         success : function (data) {
+                     a.href = document.getElementById("canvas").toDataURL("image/png").replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+         },
+        error: function(error) {
+            console.log(error);
+        }
+        });    
+    }
+    </script>
+    {% endblock %}
+    
+</html>

@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from voice import views
 
 urlpatterns = [
     path('', include('user.urls')),
@@ -22,4 +23,7 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('menu/', include('menu.urls')),
     path('voice/', include('voice.urls')),
+    path('writing/', include('writing.urls')),
+    path('chat/', views.chat),
+    path('face/', include('face.urls')),
 ]

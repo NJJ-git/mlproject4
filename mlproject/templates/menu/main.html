@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>W3.CSS Template</title>
+<title>EZ ORDER</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -17,17 +17,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container">
-    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3 w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <img src="/w3images/avatar_g2.jpg" style="width:45%;" class="w3-round"><br><br>
-    <h4><b>EZ ORDER</b></h4>
-    <p class="w3-text-grey">by OOO</p>
+<br><br>
+    <h3><b>EZ ORDER</b></h3>
+    {% if request.session.login %}
+    <button onclick="document.getElementById('info').style.display='block'" class="w3-button w3-black"><h4>{{request.session.login}}님 환영합니다.</h4></button>
+    <h6><a class="w3-button w3-grey" href="../logout" style="text-decoration:none">로그아웃</a></h6>
+    {% else %}
+    <h3><i class="fab fa-github-alt" style='font-size:20px'></i> 비회원 입니다.</h3>
+    {% endif %}
+    <p class="w3-text-grey">by acorn</p>
   </div>
   <div class="w3-bar-block">
-    <a href="/user/login/#HOME" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>HOME</a> 
-    <a href="/user/login/#HOME" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
-    <a href="/user/login/#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
+    <a href="/user/main" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>HOME</a> 
   </div>
 {% comment %}   <div class="w3-panel w3-large">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
@@ -47,7 +51,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
   <!-- Header -->
   <header id="portfolio">
-    <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    {% if request.session.login %}
+    <i style="cursor:pointer" onclick="document.getElementById('info').style.display='block'" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity">{{request.session.login}}님 환영합니다.</i>{% comment %} <img src="/w3images/avatar_g2.jpg" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"> {% endcomment %}
+    {% else %}
+    <a href="#"><i class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity">비회원 입니다.</i><img src="/w3images/avatar_g2.jpg" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    {% endif %}
+
     <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
     <div class="w3-container">
     <h1><b>EZ MENU</b></h1>
@@ -63,25 +72,25 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   
   <!-- First Photo Grid-->
   <div class="w3-row-padding">
-    <div class="w3-third w3-container w3-margin-bottom">
-      <img src="/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+    <div class="w3-third w3-container  w3-center w3-margin-bottom"><a href="/writing/order">
+      <img src="https://ediya.com/files/menu/IMG_1661753875646.png" alt="tea" style="width:60%" class="w3-hover-opacity"></a>
       <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+        <p><b>HOT 애플 루이보스티</b></p>
+        <p>잘 익은 사과의 달콤함과 부드럽고 크리미한 향미가 특징인 그린루이보스티의 맛과 향이 어우러진 음료</p>
      </div>
     </div>
-    <div class="w3-third w3-container w3-margin-bottom">
-      <img src="/w3images/lights.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+    <div class="w3-third w3-container w3-center w3-margin-bottom">
+      <img src="https://ediya.com/files/menu/IMG_1661754006557.png" alt="tea" style="width:60%" class="w3-hover-opacity">
       <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+        <p><b>ICED 애플 루이보스티</b></p>
+        <p>잘 익은 사과의 달콤함과 부드럽고 크리미한 향미가 특징인 그린루이보스티의 맛과 향이 어우러진 음료</p>
       </div>
     </div>
-    <div class="w3-third w3-container">
-      <img src="/w3images/nature.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+    <div class="w3-third w3-center w3-container">
+      <img src="https://ediya.com/files/menu/IMG_1661754198118.png" alt="Norway" style="width:60%" class="w3-hover-opacity">
       <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+        <p><b>연유 밀크티</b></p>
+        <p>연유의 달콤함과 묵직하고 부드러운 밀크티 크림의 은은한 향미를 밸런스 있게 느낄 수 있는 음료</p>
       </div>
     </div>
   </div>
@@ -89,21 +98,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   <!-- Second Photo Grid-->
   <div class="w3-row-padding">
     <div class="w3-third w3-container w3-margin-bottom">
-      <img src="/w3images/p1.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+      <img src="/w3images/p1.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
       <div class="w3-container w3-white">
         <p><b>Lorem Ipsum</b></p>
         <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
       </div>
     </div>
     <div class="w3-third w3-container w3-margin-bottom">
-      <img src="/w3images/p2.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+      <img src="/w3images/p2.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
       <div class="w3-container w3-white">
         <p><b>Lorem Ipsum</b></p>
         <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
       </div>
     </div>
     <div class="w3-third w3-container">
-      <img src="/w3images/p3.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+      <img src="/w3images/p3.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
       <div class="w3-container w3-white">
         <p><b>Lorem Ipsum</b></p>
         <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
@@ -113,21 +122,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <!-- Second Photo Grid-->
     <div class="w3-row-padding">
       <div class="w3-third w3-container w3-margin-bottom">
-        <img src="/w3images/p1.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+        <img src="/w3images/p1.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
         <div class="w3-container w3-white">
           <p><b>Lorem Ipsum</b></p>
           <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
         </div>
       </div>
       <div class="w3-third w3-container w3-margin-bottom">
-        <img src="/w3images/p2.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+        <img src="/w3images/p2.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
         <div class="w3-container w3-white">
           <p><b>Lorem Ipsum</b></p>
           <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
         </div>
       </div>
       <div class="w3-third w3-container">
-        <img src="/w3images/p3.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+        <img src="/w3images/p3.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
         <div class="w3-container w3-white">
           <p><b>Lorem Ipsum</b></p>
           <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
@@ -153,21 +162,59 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
        <a href=/voice/main>
          <button class="w3-button w3-white"><i class="fas fa-microphone w3-margin-right"></i>음성</button>
        </a>
-       <a href=/voice/main>
+{% comment %}        <a href=/voice/main>
         <button class="w3-button w3-white"><i class="fa fa-marker w3-margin-right"></i>버튼2</button>
        </a>
        <a href=/voice/main>
         <button class="w3-button w3-white"><i class="fa fa-marker w3-margin-right"></i>버튼3</button>
-       </a>
+       </a> {% endcomment %}
         {% comment %} <button class="w3-button w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>버튼3</button> {% endcomment %}
       </div>
     </div>
   </footer>
 
   
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">acorn</a></div>
 
 <!-- End page content -->
+
+
+<!--info modal-->
+<div id="info" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+    <div class="w3-center"><br>
+      <span onclick="document.getElementById('info').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+      <h2 style="color:black">회원 정보</h2>
+{% comment %}       <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> {% endcomment %}
+    </div>
+   <form class="w3-container" action="../info/" name="f" method="post">
+{%  csrf_token  %}
+<input type="hidden" name="picture" value="" >
+<table class="w3-table-all w3-border"><caption>회원 정보 보기</caption>
+  <tr><td rowspan="6" width="30%">
+ <img src="/file/picture/{{user.picture}}" width="200" height="210"></td>
+    <th width="20%">아이디</th><td>{{user.id}}</td></tr>
+   <tr><th>이름</th><td>{{user.name}}</td></tr>
+   <tr><th>성별</th><td>{% if user.gender == 1 %} 남
+                        {% else %} 여
+                        {% endif %}</td></tr>
+   <tr><th>전화</th><td>{{user.tel}}</td></tr>
+   <tr><th>이메일</th><td>{{user.email}}</td></tr>
+   <tr><td colspan="2" class="w3-center">
+     <button class="w3-button w3-black" href="../../update/{{user.id}}/">수정</button>
+{% if request.session.login != 'admin' %}
+     <button class="w3-button w3-black" href="../../delete/{{user.id}}/">탈퇴</button>
+{% endif %}
+</td></tr>
+</table></form>
+
+    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+      <button onclick="document.getElementById('info').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+    </div>
+
+  </div>
+</div>
+</div>
 </div>
 
 <script>
@@ -181,6 +228,23 @@ function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
 }
+
+//update
+function  inputcheck(f) {
+  if(f.pass.value == "") {
+      alert("비밀번호를 입력하세요");
+      f.pass.focus();
+      return false;
+    }
+  }
+  function win_passchg() {
+   var op = "width=500, height=250, left=50,top=150";
+   open("../../password/{{user.id}}/","",op);
+  }
+  function win_upload(){
+    var op = "width=500,height=150,left=50, top=150";
+    open("../../picture/","",op);
+  }
 </script>
 
 </body>

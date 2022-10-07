@@ -1,0 +1,2 @@
+model_checkpoint_path: "seq2seq-chatbot-no-attention-checkpoint.ckpt"
+all_model_checkpoint_paths: "seq2seq-chatbot-no-attention-checkpoint.ckpt"

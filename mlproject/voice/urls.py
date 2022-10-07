@@ -10,6 +10,5 @@ voice 폴더에 urls.py
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('main/', views.main, name='main'),
-    
+    path('main/', views.main),
 ]
