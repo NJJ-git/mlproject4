@@ -67,11 +67,11 @@ function setUserName(username) {
 		setTimeout(function() {
 
 			return sendMessage("반갑습니다." + username + "님. 닉네임이 설정되었습니다.", 'left');
-		}, 1500);
+		}, 1000);
 		setTimeout(function() {
 
 			return sendMessage("주문 할 메뉴를 선택하여주세요.", 'left');
-		}, 3000);
+		}, 2000);
 		
 
 		return username;
