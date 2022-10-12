@@ -25,5 +25,5 @@ urlpatterns = [
     path('voice/', include('voice.urls')),
     path('writing/', include('writing.urls')),
     path('chat/', views.chat),
-    path('face/', include('face.urls')),
+    path('faceDetect/', include('faceDetect.urls')),
 ]

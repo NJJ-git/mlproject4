@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from .chatbot import run_chatbot
+from .chatbot2 import run_chatbot
 
 
 # Create your views here.

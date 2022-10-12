@@ -46,7 +46,7 @@ function sendMessage(text, message_side) {
 
 function greet() {
 	setTimeout(function() {
-		return sendMessage("챗봇에 오신걸 환영합니다.", 'left');
+		return sendMessage("EZ-ORDER 음성인식 주문을 시작합니다.", 'left');
 	}, 1000);
 
 	setTimeout(function() {
@@ -70,7 +70,7 @@ function setUserName(username) {
 		}, 1000);
 		setTimeout(function() {
 
-			return sendMessage("대화 할 준비가 되었습니다 ", 'left');
+			return sendMessage("주문 할 메뉴를 선택하세요.", 'left');
 		}, 2000);
 		
 
@@ -127,22 +127,22 @@ function onSendButtonClicked(speechMsg) {
 		if (messageText.includes('안녕')) {
 			setTimeout(function() {
 
-				return sendMessage("안녕하세요. 저는 Kochat 여행봇입니다.", 'left');
+				return sendMessage("안녕하세요. 저는 EZ-ORDER 입니다.", 'left');
 
 			}, 1000);
 		} else if (messageText.includes('고마워')) {
 			setTimeout(function() {
-				return sendMessage("천만에요. 더 물어보실 건 없나요?", 'left');
+				return sendMessage("천만에요. 더 필요하신 건 없나요?", 'left');
 			}, 1000);
 		} else if (messageText.includes('없어')) {
 			setTimeout(function() {
 				return sendMessage("그렇군요. 알겠습니다!", 'left');
 			}, 1000);
 
-		} else if (messageText.includes('끝')) {
+		} else if (messageText.includes('끝', '종료')) {
 			setTimeout(function() {
 				startchat = false
-				return sendMessage("네 안녕히 가세요 ", 'end');
+				return sendMessage("네 주문을 종료합니다.", 'end');
 			}, 1000);
 
 		} else {

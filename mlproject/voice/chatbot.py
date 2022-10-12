@@ -10,7 +10,7 @@ import warnings
 import numpy as np
 import re
 import pandas as pd
-chatbot_data = pd.read_csv('ChatbotData.csv', encoding='utf-8')
+chatbot_data = pd.read_csv('ChatbotData_.csv', encoding='utf-8')
 question, answer = list(chatbot_data['Q']), list(chatbot_data['A'])
 texts = []
 pairs = []
