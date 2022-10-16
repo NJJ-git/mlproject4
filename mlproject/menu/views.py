@@ -9,5 +9,5 @@ from faceDetect.forms import *
 def main(request):
     return render(request, 'menu/main.html')
 def logout(request) :    
-    auth.logout(request) #로그아웃
-    return HttpResponseRedirect("/faceDetect/home.html")
+    request.session.flush() #로그아웃
+    return HttpResponseRedirect("/faceDetect/")

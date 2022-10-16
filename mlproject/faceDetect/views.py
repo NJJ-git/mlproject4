@@ -62,9 +62,9 @@ def login(request):
         print("except 실행")
         return render(request, 'faceDetect/login.html', context)
 
-def logout(request):
-    auth.logout(request)  # 로그아웃
-    return HttpResponseRedirect('home')
+# def logout(request):
+#     request.session.flush()  # 로그아웃
+#     return HttpResponseRedirect('home')
 
 
 def Greeting(request, face_id):
