@@ -4,25 +4,24 @@
   <head>
     <meta charset="UTF-8" />
     <title>Greeting</title>
-<<<<<<< HEAD
   </head>
   <body>
     {% block content %}
-    <h1>Welcome to {{ user.name }}</h1>
+    <h3>{{user.name}} 님! EZ ORDER에 오신 것을 환영합니다.</h3>
+    <div class="w3-container">
+      <button
+        onclick="location.href='/voice/main'"
+        class="w3-button w3-block w3-black w3-ripple"
+      >
+        말로 주문하기</button
+      ><br />
+      <button
+        onclick="location.href='/menu/main'"
+        class="w3-button w3-block w3-black"
+      >
+        터치로 주문하기
+      </button>
+    </div>
     {% endblock %}
   </body>
 </html>
-=======
-</head>
-<body>
-{% block content %}
-<h3>{{user.name}} 님! EZ ORDER에 오신 것을 환영합니다.</h3>
-<div class="w3-container">
-    <button onclick="location.href='/voice/main'" class="w3-button w3-block w3-black w3-ripple" >말로 주문하기</button><br>
-    <button onclick="location.href='/menu/main'" class="w3-button w3-block w3-black">터치로 주문하기</button>
-</div>
-    {% endblock %}
-
-</body>
-</html>
->>>>>>> 6da1daf9319653cb7b3442bcf949d2f984cf969e
