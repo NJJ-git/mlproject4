@@ -28,6 +28,50 @@ def upload(request) :
     image.close()
     answer = {"filename":"writing.png"}
     return JsonResponse(answer)
+
+# 여기부터는 아무거나 친거임
+def coffee_order(request) :
+    return render(request, template_name='writing/coffee_order.html')  
+
+
+## 변수 선언
+coffee=0
+
+## 함수 정의
+@csrf_exempt
+def coffee_machine(button) :
+    print("#1. 뜨거운 물을 준비한다.");
+    print("#2. 종이컵을 준비한다");
+
+    if coffee == 1:
+        print("#3. : 밀크커피 가루 준비")
+    elif coffee == 2:
+        print("#3. : 설탕커피 가루 준비")
+    elif coffee == 3:
+        print("#3. : 블랙커피 가루 준비")
+    else:
+        print(("#3. 아무거나 탄다\n"))
+
+    print("#4. 물을 붓는다.");
+    print("#5. 스푼 준비");
+    print()
+    print("커피 완료 신호 ");
+
+## 메인 코드
+
+    coffee=int(input("A손님, 어떤 커피를 드릴까요? (1:밀크, 2:설탕, 3:블랙) "))
+    coffee_machine(coffee)
+    print("A손님 커피 완료")
+
+    coffee=int(input("B손님, 어떤 커피를 드릴까요? (1:밀크, 2:설탕, 3:블랙) "))
+    coffee_machine(coffee)
+    print("B손님 커피 완료")
+
+    coffee=int(input("C손님, 어떤 커피를 드릴까요? (1:밀크, 2:설탕, 3:블랙) "))
+    coffee_machine(coffee)
+    print("C손님 커피 완료")
+
+
     
        
     
