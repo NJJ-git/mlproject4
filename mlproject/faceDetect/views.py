@@ -5,7 +5,6 @@ from .forms import *
 from .models import *
 from django.contrib import messages, auth
 
-
 faceRecognition = FaceRecognition()
 
 
@@ -41,17 +40,18 @@ def login(request):
     # if request.method != 'POST':
     #     return render(request, 'faceDetect/login.html')
     # else:
-    face_id = faceRecognition.recognizeFace()
-    print("def login의 face_id : "+str(face_id))
+    user_id = faceRecognition.recognizeFace()
+    print("def login의 face_id : "+str(user_id))
     # id1 = request.POST.get('face_id')
     # print(id1)
     try:
         # user = UserProfile.objects.get(face_id=id1)
-        if face_id is not None:
-            session_id = request.session.session_key
-            request.session['login'] = face_id
-            print("session의 face_id: "+str(face_id))
-            return redirect('greeting', str(face_id))
+        if user_id is not None:
+            # session_id=UserProfile.objects.get(face_id=user_id)
+            # print(session_id)
+            request.session['login'] = user_id
+            # print("session의 face_id: "+str_id))
+            return redirect('greeting', str(user_id))
     #     # return HttpResponseRedirect('greeting', str(face_id))
         else:
             context = {'msg': '얼굴이 일치하지 않습니다', 'url': '../login/'}
@@ -61,14 +61,14 @@ def login(request):
         print("except 실행")
         return render(request, 'faceDetect/login.html', context)
 
-
-def logout(request):
-    auth.logout(request)  # 로그아웃
-    return HttpResponseRedirect('home')
+# def logout(request):
+#     request.session.flush()  # 로그아웃
+#     return HttpResponseRedirect('home')
 
 
 def Greeting(request, face_id):
-    user_id = request.session.get('face_id')
+    # user_id = request.session.get()
+    # print(user_id)
     context = {
         'user': UserProfile.objects.get(face_id=face_id)
     }

@@ -47,7 +47,7 @@ def join(request):
         return HttpResponseRedirect("../login/")
 
 
-def main(request):
+def main(request): 
     return render(request, 'user/main.html')
 
 
