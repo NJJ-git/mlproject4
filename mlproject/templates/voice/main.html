@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>음성 인식 주문하기</title>
-    {% load static %}
+    <title>KIC 음성 챗봇</title>
+    {% load static %} {% comment '주석 '%}
     <script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
     <script
       src="{% static 'js/bootstrap.js' %}"
@@ -21,6 +21,7 @@
       id="bootstrap-css"
     />
     <link href="{% static 'css/main.css' %}" rel="stylesheet" id="main-css" />
+    {% endcomment %}
     <script src="/static/js/jquery.js" type="text/javascript"></script>
     <script src="/static/js/bootstrap.js" type="text/javascript"></script>
     <script src="/static/js/main.js" type="text/javascript"></script>
@@ -41,7 +42,7 @@
           <div class="button minimize"></div>
           <div class="button maximize"></div>
         </div>
-        <div class="title">음성 인식 주문</div>
+        <div class="title">KIC 음성 챗봇</div>
       </div>
       <ul class="messages"></ul>
       <div class="bottom_wrapper clearfix">
@@ -51,7 +52,7 @@
           onclick="onSendButtonClicked()"
         >
           <div class="icon"></div>
-          <div class="text">주문하기</div>
+          <div class="text">음성 챗봇시작하기</div>
         </div>
       </div>
     </div>

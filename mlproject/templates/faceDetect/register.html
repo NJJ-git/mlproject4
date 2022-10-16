@@ -1,28 +1,31 @@
 {% extends "base2.html" %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko-kr">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}회원 가입{% endblock %}</title>
 </head>
 <body>
     {% block content %}
-<form action="" method="post">
+    <form action="" method="post">
     {% csrf_token %}
-{#    <input type="text" placeholder="Full name"><br>#}
-{#    <input type="number" name="userId" placeholder="Number"><br>#}
-{#    <input type="text" name="email" id="" placeholder="Email"> <br>#}
-{#    <input type="text" name="phone" placeholder="Phone"><br>#}
-{#    <input type="text" name="job" id="" placeholder="Job"><br>#}
-{#    <input type="text" name="address" placeholder="Address"><br>#}
-{#    <input type="text" name="bio" placeholder="About"><br>#}
-{#    <input type="file" name="dp" accept="image/*" id=""><br>#}
-{#    <input type="submit" value="Register"><br>#}
-{#    <input type="reset" value="Clear">#}
-    {{ form.as_p }}
-    <input type="submit" value="회원 가입"><br>
-    <input type="reset" value="초기화">
-</form>
+    <div class="w3-center" style="color:white"><br>
+    {#    <input type="number" name="face_id" placeholder="Number"><br>#}
+    {#    <input type="text" name="name"placeholder="Name"><br>#}
+    {#    <input type="text" name="address" placeholder="Address"><br>#}
+    {#    <input type="text" name="job" id="" placeholder="Job"><br>#}
+    {#    <input type="text" name="phone" placeholder="Phone"><br>#}
+    {#    <input type="text" name="email" id="" placeholder="Email"> <br>#}
+    {#    <input type="file" name="image" accept="image/*" id=""><br>#}
+    {#    <input type="submit" value="Register"><br>#}
+    {#    <input type="reset" value="Clear">#}
+      {{ form.as_p }}
+      <input type="submit" value="회원가입"><br>
+      <hr>
+      <button class="w3-button w3-green"><a href="/faceDetect/"style="text-decoration:none;">Main</a></button>
+      <button class="w3-button w3-red"><a href="/faceDetect/"style="text-decoration:none;">Cancel</a></button>
+    </div>
+    </form>
     {% endblock %}
 </body>
 </html>

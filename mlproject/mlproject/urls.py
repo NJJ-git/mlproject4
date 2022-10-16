@@ -18,9 +18,9 @@ from django.urls import path, include
 from voice import views
 
 urlpatterns = [
-    path('', include('user.urls')),
+    path('', include('faceDetect.urls')),
     path('admin/', admin.site.urls),
-    path('user/', include('user.urls')),
+    # path('user/', include('user.urls')),
     path('menu/', include('menu.urls')),
     path('voice/', include('voice.urls')),
     path('writing/', include('writing.urls')),

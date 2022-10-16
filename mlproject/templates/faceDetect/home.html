@@ -1,12 +1,30 @@
+{% extends "base2.html" %}
+{% comment '기본 html'%}
+  {% extends "base1.html" %} : 상위 폼.  첫줄에 구현해야 함 
+  block content  : base1.html 의 {block content}을 대체
+{% endcomment%}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>This is homw</title>
+<html><head><meta charset="UTF-8">
+<title>{% block title %}로그인{% endblock %}</title>
 </head>
 <body>
-<h1>This is home page</h1>
-<p>if you are not registered <a href="{% url 'register' %}">Register</a></p> <br>
-<p>Login <a href="{% url 'login' %}">login</a></p> <br>
+{% block content %}
+{{msg}}
+<div class="w3-container w3-center">
+  <h2>더 많은 혜택을 받으려면?</h2>
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black w3-large"><a href="{% url 'login' %}" style="text-decoration:none;">로그인</a></button>
+  <hr>
+  <h4>회원이 아니신가요?</h4>
+  <button onclick="document.getElementById().style.display='block'" class="w3-button w3-white w3-large"><a href="{% url 'register' %}" style="text-decoration:none;">회원 가입</a></button>
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+    <div class="w3-center"><br>
+      <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+      <h2 style="color:black">Face ID</h2>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
 </body>
 </html>

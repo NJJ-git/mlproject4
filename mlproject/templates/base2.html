@@ -70,9 +70,9 @@
   <div id="HOME" class="w3-dark-grey w3-container" style="height:700px">
     <div class="w3-padding-64 w3-center">
       <h1 style="color:black; font-size:58px;" >EZ ORDER<h1>
-      <h2>SIGN IN</h2>
+      <h2>{% block title %}{% endblock %}</h2>
      {% comment %}  <img src="/w3images/avatar3.png" class="w3-margin w3-circle" alt="Person" style="width:50%"> {% endcomment %}
-      <div class="w3-left-align w3-padding-large">
+      <div class="w3-left-align w3-padding-large w3-center">
         {% block content %} {% endblock %}
       </div>
     </div>

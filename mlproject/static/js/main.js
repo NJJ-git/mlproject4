@@ -70,7 +70,7 @@ function setUserName(username) {
 		}, 1000);
 		setTimeout(function() {
 
-			return sendMessage("주문 할 메뉴를 선택하세요.", 'left');
+			return sendMessage("대화 할 준비가 되었습니다 ", 'left');
 		}, 2000);
 		
 

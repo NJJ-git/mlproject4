@@ -24,14 +24,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <h3><b>EZ ORDER</b></h3>
     {% if request.session.login %}
     <button onclick="document.getElementById('info').style.display='block'" class="w3-button w3-black"><h4>{{request.session.login}}님 환영합니다.</h4></button>
-    <h6><a class="w3-button w3-grey" href="../logout" style="text-decoration:none">로그아웃</a></h6>
+    <h6><a class="w3-button w3-grey" href="/faceDetect/" style="text-decoration:none">로그아웃</a></h6>
     {% else %}
     <h3><i class="fab fa-github-alt" style='font-size:20px'></i> 비회원 입니다.</h3>
     {% endif %}
     <p class="w3-text-grey">by acorn</p>
   </div>
   <div class="w3-bar-block">
-    <a href="/user/main" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>HOME</a> 
+    <a href="/faceDetect/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>HOME</a> 
   </div>
 {% comment %}   <div class="w3-panel w3-large">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
