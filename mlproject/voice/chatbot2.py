@@ -13,6 +13,8 @@ import re
 
 from konlpy.tag import Okt
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 
 # 태그 단어
 PAD = "<PADDING>"   # 패딩
@@ -358,7 +360,7 @@ def convert_index_to_text(indexs, vocabulary):
     return sentence
 
 
-##################################### 학습 부분 시작
+# 학습 부분 시작
 '''  학습부분 
 # 에폭 반복
 for epoch in range(20):
@@ -401,7 +403,7 @@ with open('./model/word_to_index.pkl', 'wb') as f:
 with open('./model/index_to_word.pkl', 'wb') as f:
     pickle.dump(index_to_word, f, pickle.HIGHEST_PROTOCOL)    
 '''
-################################### 학습 부분 종료
+# 학습 부분 종료
 
 # 예측을 위한 입력 생성
 
@@ -417,10 +419,13 @@ def make_predict_input(sentence):
 
 
 # 모델 파일 로드
-encoder_model = models.load_model('./model/seq2seq_chatbot_encoder_model.h5')
-decoder_model = models.load_model('./model/seq2seq_chatbot_decoder_model.h5')
+encoder_model = models.load_model(
+    './model/seq2seq_chatbot_encoder_model.h5', compile=False)
+decoder_model = models.load_model(
+    './model/seq2seq_chatbot_decoder_model.h5', compile=False)
 
 # 인덱스 파일 로드
+
 with open('./model/word_to_index.pkl', 'rb') as f:
     word_to_index = pickle.load(f)
 with open('./model/index_to_word.pkl', 'rb') as f:

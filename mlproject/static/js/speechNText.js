@@ -24,7 +24,7 @@ recognition.onresult = function(e) {
 	p = speechMsg    //입력된 음성 text
 };
 
-document.addEventListener("click", function(e) {
+window.addEventListener("click", function(e) {
 	//	var t = e.target;
 	//	var input = t.previousElementSibling;
 	greet();

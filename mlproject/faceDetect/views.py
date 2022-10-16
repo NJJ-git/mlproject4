@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from faceDetect.detection import FaceRecognition
 from .forms import *
-from django.contrib import messages
+from .models import *
+from django.contrib import messages, auth
+
 
 faceRecognition = FaceRecognition()
 
@@ -16,11 +19,11 @@ def register(request):
         if form.is_valid():
             form.save()
             print("IN HERE")
-            messages.success(request, "SuceessFully registered")
+            messages.success(request, "계정이 성공적으로 등록되었습니다!")
             addFace(request.POST['face_id'])
-            redirect('home')
+            return redirect('home')
         else:
-            messages.error(request, "Account registered failed")
+            messages.error(request, "계정 등록에 실패했습니다!")
     else:
         form = ResgistrationForm()
 
@@ -35,14 +38,46 @@ def addFace(face_id):
 
 
 def login(request):
+    # if request.method != 'POST':
+    #     return render(request, 'faceDetect/login.html')
+    # else:
     face_id = faceRecognition.recognizeFace()
-    print(face_id)
-    return redirect('greeting', str(face_id))
+    print("def login의 face_id : "+str(face_id))
+    # id1 = request.POST.get('face_id')
+    # print(id1)
+    try:
+        # user = UserProfile.objects.get(face_id=id1)
+        if face_id is not None:
+            session_id = request.session.session_key
+            request.session['login'] = face_id
+            print("session의 face_id: "+str(face_id))
+            return redirect('greeting', str(face_id))
+    #     # return HttpResponseRedirect('greeting', str(face_id))
+        else:
+            context = {'msg': '얼굴이 일치하지 않습니다', 'url': '../login/'}
+            return render(request, 'alert.html', context)
+    except:
+        context = {'msg': '얼굴을 다시 인식해 주세요!'}
+        print("except 실행")
+        return render(request, 'faceDetect/login.html', context)
+
+
+def logout(request):
+    auth.logout(request)  # 로그아웃
+    return HttpResponseRedirect('home')
 
 
 def Greeting(request, face_id):
-    face_id = int(face_id)
+    user_id = request.session.get('face_id')
     context = {
         'user': UserProfile.objects.get(face_id=face_id)
     }
+    # if user_id:
+    #     user = UserProfile.objects.get(pk=face_id)
+    #     print('session!')
+    #     # return HttpResponseRedirect(f'{user} 로그인 성공')
     return render(request, 'faceDetect/greeting.html', context=context)
+
+
+def voice(request):
+    return HttpResponseRedirect(request, '/voice/main/')

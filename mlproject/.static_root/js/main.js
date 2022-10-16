@@ -50,7 +50,7 @@ function greet() {
 	}, 1000);
 
 	setTimeout(function() {
-		return sendMessage("사용할 닉네임을 알려주세요.", 'left');
+		return sendMessage("주문자의 성함을 알려주세요.", 'left');
 	}, 2000);
 
 
@@ -66,11 +66,11 @@ function setUserName(username) {
 
 		setTimeout(function() {
 
-			return sendMessage("반갑습니다." + username + "님. 닉네임이 설정되었습니다.", 'left');
+			return sendMessage("반갑습니다." + username + "님.", 'left');
 		}, 1000);
 		setTimeout(function() {
 
-			return sendMessage("주문 할 메뉴를 선택하여주세요.", 'left');
+			return sendMessage("주문 할 메뉴를 선택하세요.", 'left');
 		}, 2000);
 		
 
