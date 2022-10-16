@@ -28421,7 +28421,7 @@ function recognize() {
   grayscaleImg = imageDataToGrayscale(imgData);
   var boundingRectangle = getBoundingRectangle(grayscaleImg, 0.01);
   var trans = centerImage(grayscaleImg); // [dX, dY] to center of mass
-  var canvasCopy = document.createElement("canvas");
+  var canvasCopy = document.getElementsByTagName("canvas");
   canvasCopy.width = imgData.width;
   canvasCopy.height = imgData.height;
   var copyCtx = canvasCopy.getContext("2d");
