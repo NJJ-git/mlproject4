@@ -45,8 +45,9 @@ def login(request):
     # id1 = request.POST.get('face_id')
     # print(id1)
     try:
-        # user = UserProfile.objects.get(face_id=id1)
-        if user_id is not None:
+        uid = UserProfile.objects.get(face_id=user_id)
+        print(uid.face_id)
+        if user_id == uid.face_id :
             # session_id=UserProfile.objects.get(face_id=user_id)
             # print(session_id)
             request.session['login'] = user_id
@@ -59,7 +60,7 @@ def login(request):
     except:
         context = {'msg': '얼굴을 다시 인식해 주세요!'}
         print("except 실행")
-        return render(request, 'faceDetect/login.html', context)
+        return render(request, 'alert.html', context)
 
 # def logout(request):
 #     request.session.flush()  # 로그아웃
@@ -67,10 +68,11 @@ def login(request):
 
 
 def Greeting(request, face_id):
-    # user_id = request.session.get()
-    # print(user_id)
+    user_id = request.session.get('login')
+    print(user_id)
     context = {
         'user': UserProfile.objects.get(face_id=face_id)
+        # 'user' : user_id
     }
     # if user_id:
     #     user = UserProfile.objects.get(pk=face_id)

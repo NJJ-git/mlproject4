@@ -16,7 +16,8 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     "productNo",
-                    models.IntegerField(default=0, primary_key=True, serialize=False),
+                    models.IntegerField(
+                        default=0, primary_key=True, serialize=False),
                 ),
                 ("category", models.CharField(max_length=20)),
             ],
