@@ -17,12 +17,12 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 # 태그 단어
-PAD = "<PADDING>"   # 패딩
+PAD = "<PADDING>"   # 패딩 -> 문장 전체의 단어의 길이를 맞춰줌
 STA = "<START>"     # 시작
 END = "<END>"       # 끝
-OOV = "<OOV>"       # 없는 단어(Out of Vocabulary)
+OOV = "<OOV>"       # 없는 단어(Out of Vocabulary) -> 학습이 되지 않은 데이터를 초과하는 단어를 기타로 설정함.
 
-# 태그 인덱스
+# 태그 인덱스 -> 단어들을 인덱스화 함.
 PAD_INDEX = 0
 STA_INDEX = 1
 END_INDEX = 2
@@ -33,20 +33,21 @@ ENCODER_INPUT = 0
 DECODER_INPUT = 1
 DECODER_TARGET = 2
 
-# 한 문장에서 단어 시퀀스의 최대 개수
+# 한 문장에서 단어 시퀀스의 최대 개수 -> 패딩을 30개로 정함
 max_sequences = 30
 
 # 임베딩 벡터 차원
 embedding_dim = 100
 
-# LSTM 히든레이어 차원
+# LSTM 히든레이어 차원 -> 다차원 배열 사용 : 128차원으로 나타냄.
 lstm_hidden_dim = 128
 
-# 정규 표현식 필터
+# 정규 표현식 필터 -> 특수문자를 날리려고 씀
 RE_FILTER = re.compile("[.,!?\"':;~()]")
 
-# 챗봇 데이터 로드
+# 챗봇 데이터 로드 -> 'Q' : question / 'A' : answer
 chatbot_data = pd.read_csv('ChatBotData_.csv', encoding='utf-8')
+# chatbot_data.info()
 question, answer = list(chatbot_data['Q']), list(chatbot_data['A'])
 
 
@@ -80,9 +81,9 @@ def pos_tag(sentences):
     return sentences_pos
 
 
-# 형태소분석 수행
-question = pos_tag(question)
-answer = pos_tag(answer)
+# 형태소분석 수행 -> 특수문자가 없어서 의미가 없다.
+question = pos_tag(question) #커피 한 잔 주실래요? -> 커피 한 잔 주실래요 로 변형
+answer = pos_tag(answer) # 받은 질문에 대한 대답
 
 
 # 질문과 대답 문장들을 하나로 합침
@@ -90,7 +91,7 @@ sentences = []
 sentences.extend(question)
 sentences.extend(answer)
 
-words = []
+words = [] # 분석하기 위해 숫자화하려고 합침
 
 # 단어들의 배열 생성
 for sentence in sentences:
@@ -98,12 +99,12 @@ for sentence in sentences:
         words.append(word)
 
 # 길이가 0인 단어는 삭제
-words = [word for word in words if len(word) > 0]
+words = [word for word in words if len(word) > 0] #공백이 있는 문자들은 모두 제거
 
 # 중복된 단어 삭제
 words = list(set(words))
 
-# 제일 앞에 태그 단어 삽입
+# 제일 앞에 태그 단어 삽입 -> 단어들에게 인덱스 부과
 words[:0] = [PAD, STA, END, OOV]
 
 
@@ -193,14 +194,14 @@ def run_chatbot(q):
     return sentence
 
 
-# 인코더 입력 인덱스 변환
+# 인코더 입력 인덱스 변환 -> '아메리카노' 를 5로 인덱스 저장하고 나머지 단어들은 모두 0으로 처리. [5, 0, 0, 0 ....]의 형식으로.
 x_encoder = convert_text_to_index(question, word_to_index, ENCODER_INPUT)
 
 # 첫 번째 인코더 입력 출력 (12시 땡)
 x_encoder[0]
 
 
-# 디코더 입력 인덱스 변환
+# 디코더 입력 인덱스 변환 -> 단어들의 인덱스들로 표현. [1, 5, 12,9, 10 ....] 형식으로
 x_decoder = convert_text_to_index(answer, word_to_index, DECODER_INPUT)
 
 # 첫 번째 디코더 입력 출력 (START 하루 가 또 가네요)
@@ -214,7 +215,7 @@ y_decoder = convert_text_to_index(answer, word_to_index, DECODER_TARGET)
 y_decoder[0]
 
 
-# 원핫인코딩 초기화
+# 원핫인코딩 초기화 -> ex) 남 = 1/ 여 =2 -> [1 0] / [0 1] 로 표현 || '아메리카노' = 5 -> [0 0 0 0 0 1 0 0 0 0 0]
 one_hot_data = np.zeros((len(y_decoder), max_sequences, len(words)))
 one_hot_data
 # 디코더 목표를 원핫인코딩으로 변환
@@ -243,7 +244,7 @@ encoder_outputs = layers.Embedding(len(words), embedding_dim)(encoder_inputs)
 # return_state가 True면 상태값 리턴
 # LSTM은 state_h(hidden state)와 state_c(cell state) 2개의 상태 존재
 encoder_outputs, state_h, state_c = layers.LSTM(lstm_hidden_dim,
-                                                dropout=0.1,
+                                                dropout=0.1, #overfittin 방지를 위해 설정하는 값
                                                 recurrent_dropout=0.5,
                                                 return_state=True)(encoder_outputs)
 
@@ -275,7 +276,7 @@ decoder_outputs, _, _ = decoder_lstm(decoder_outputs,
                                      initial_state=encoder_states)
 
 # 단어의 개수만큼 노드의 개수를 설정하여 원핫 형식으로 각 단어 인덱스를 출력
-decoder_dense = layers.Dense(len(words), activation='softmax')
+decoder_dense = layers.Dense(len(words), activation='softmax') # 층을 쌓은 부분
 decoder_outputs = decoder_dense(decoder_outputs)
 
 
@@ -284,12 +285,12 @@ decoder_outputs = decoder_dense(decoder_outputs)
 # --------------------------------------------
 
 # 입력과 출력으로 함수형 API 모델 생성
-model = models.Model([encoder_inputs, decoder_inputs], decoder_outputs)
+model = models.Model([encoder_inputs, decoder_inputs], decoder_outputs) #딥러닝모델을 만듦
 
 # 학습 방법 설정
-model.compile(optimizer='rmsprop',
-              loss='categorical_crossentropy',
-              metrics=['acc'])
+model.compile(optimizer='rmsprop', # optimizer : 경사하강법. 최적의 값을 찾아감
+              loss='categorical_crossentropy', # loss : 손실함수
+              metrics=['acc']) # metrics accuracy -> keras
 
 
 # --------------------------------------------
@@ -337,7 +338,7 @@ decoder_model = models.Model([decoder_inputs] + decoder_states_inputs,
 #
 # # 훈련 및 테스트
 
-# 인덱스를 문장으로 변환
+# 인덱스를 문장으로 변환 -> [0 0 0 0 0 5 0 0 0 0 ] => '아메리카노'
 def convert_index_to_text(indexs, vocabulary):
 
     sentence = ''
@@ -363,7 +364,7 @@ def convert_index_to_text(indexs, vocabulary):
 # 학습 부분 시작
 '''  학습부분 
 # 에폭 반복
-for epoch in range(20):
+for epoch in range(20): -> epoch 100번 반복하는 걸 20번 반복
     print('Total Epoch :', epoch + 1)
 
     # 훈련 시작
@@ -374,8 +375,8 @@ for epoch in range(20):
                         verbose=0)
     
     # 정확도와 손실 출력
-    print('accuracy :', history.history['acc'][-1])
-    print('loss :', history.history['loss'][-1])
+    print('accuracy :', history.history['acc'][-1]) -> 숫자가 1에 가까워야 정확함.
+    print('loss :', history.history['loss'][-1]) -> 숫자가 낮아야 손실이 가장 적음
     
     # 문장 예측 테스트
     # (3 박 4일 놀러 가고 싶다) -> (여행 은 언제나 좋죠)
@@ -393,7 +394,7 @@ for epoch in range(20):
     print()
 
 
-# 모델 저장
+# 모델 저장 -> 온라인 할때마다 2000번씩 학습할 수 없으므로 미리 모델을 저장해서 사용
 encoder_model.save('./model/seq2seq_chatbot_encoder_model.h5')
 decoder_model.save('./model/seq2seq_chatbot_decoder_model.h5')
 
@@ -418,7 +419,7 @@ def make_predict_input(sentence):
     return input_seq
 
 
-# 모델 파일 로드
+# 모델 파일 로드 -> 학습된 모델을 불러와서 바로 적용
 encoder_model = models.load_model(
     './model/seq2seq_chatbot_encoder_model.h5', compile=False)
 decoder_model = models.load_model(

@@ -10,9 +10,7 @@ class ResgistrationForm(forms.ModelForm):
             'address',
             'job',
             'phone',
-            'email',
-            'image'
-
+            'email'
         ]
         labels = {
             'face_id': '아이디(전화번호)',
@@ -20,6 +18,5 @@ class ResgistrationForm(forms.ModelForm):
             'address': '주소',
             'job': '직업',
             'phone': '전화번호',
-            'email': '이메일',
-            'image': '이미지'
+            'email': '이메일'
         }  

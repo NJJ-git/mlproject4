@@ -1,5 +1,6 @@
 // variables
-let userName = null;
+let userName = '{{request.session.login}}';
+console.log(username)
 let state = 'SUCCESS';
 
 //입력된 message를 창에 추가하여주는 생성자 
@@ -25,7 +26,7 @@ function Message(arg) {
 
 //메세지 보내는 함수이고 'left'를 음성으로 변환한다 
 function sendMessage(text, message_side) {
-	if (message_side == 'left') speech(text)
+	if (message_side == 'left') {speech(text)}
 	if (message_side == 'end') {
 		startchat = false
 		speech(text)
@@ -50,7 +51,7 @@ function greet() {
 	}, 1000);
 
 	setTimeout(function() {
-		return sendMessage("주문자의 성함을 알려주세요.", 'left');
+		return sendMessage("안녕하세요."+username, 'left');
 	}, 2000);
 
 
