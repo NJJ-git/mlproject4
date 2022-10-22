@@ -60,88 +60,60 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
     <div class="w3-container">
     <h1><b>EZ MENU</b></h1>
-    <div class="w3-section w3-bottombar w3-padding-16">
-      <span class="w3-margin-right">Filter:</span> 
-      <button class="w3-button w3-black">ALL</button>
-      <button class="w3-button w3-white"><i class="fas fa-coffee w3-margin-right"></i>BEVERAGE</button>
-      <button class="w3-button w3-white"><i class="fas fa-bread-slice w3-margin-right"></i>FOOD</button>
-      <button class="w3-button w3-white w3-hide-small"><i class="fas fa-cube w3-margin-right"></i>GOODS</button>
-    </div>
-    </div>
+        <div class="w3-bar w3-black">
+        {% comment %} <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'ALL')">All</button> {% endcomment %}
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Coffee')">COFFEE</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Beverage')">BEVERAGE</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Tea')">TEA</button>
+      </div>
+
   </header>
+  <div id="Coffee" class="w3-row-padding city">
   
-  <!-- First Photo Grid-->
-  <div class="w3-row-padding">
+  {% for coffee in coffeelist %}
+
     <div class="w3-third w3-container  w3-center w3-margin-bottom"><a href="/writing/order">
-      <img src="https://ediya.com/files/menu/IMG_1661753875646.png" alt="tea" style="width:60%" class="w3-hover-opacity"></a>
-      <div class="w3-container w3-white">
-        <p><b>HOT 애플 루이보스티</b></p>
-        <p>잘 익은 사과의 달콤함과 부드럽고 크리미한 향미가 특징인 그린루이보스티의 맛과 향이 어우러진 음료</p>
-     </div>
-    </div>
-    <div class="w3-third w3-container w3-center w3-margin-bottom">
-      <img src="https://ediya.com/files/menu/IMG_1661754006557.png" alt="tea" style="width:60%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>ICED 애플 루이보스티</b></p>
-        <p>잘 익은 사과의 달콤함과 부드럽고 크리미한 향미가 특징인 그린루이보스티의 맛과 향이 어우러진 음료</p>
+      <img src="{{coffee.mimg_path}}" alt="tea" style="width:60%" class="w3-hover-opacity"></a>
+      <div class="w3-container w3-white" style="height:100px">
+        <p><b>{{coffee.mName}}</b></p>
+        <p style="overflow:hidden; word-break: break-word; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical">{{coffee.explain}}</p>
       </div>
     </div>
-    <div class="w3-third w3-center w3-container">
-      <img src="https://ediya.com/files/menu/IMG_1661754198118.png" alt="Norway" style="width:60%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>연유 밀크티</b></p>
-        <p>연유의 달콤함과 묵직하고 부드러운 밀크티 크림의 은은한 향미를 밸런스 있게 느낄 수 있는 음료</p>
-      </div>
-    </div>
+
+  {% endfor %}
+
   </div>
+
+  <div id="Tea" class="w3-row-padding city">
   
-  <!-- Second Photo Grid-->
-  <div class="w3-row-padding">
-    <div class="w3-third w3-container w3-margin-bottom">
-      <img src="/w3images/p1.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom">
-      <img src="/w3images/p2.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      </div>
-    </div>
-    <div class="w3-third w3-container">
-      <img src="/w3images/p3.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
-        <p><b>Lorem Ipsum</b></p>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      </div>
-    </div>
-  </div>
-    <!-- Second Photo Grid-->
-    <div class="w3-row-padding">
-      <div class="w3-third w3-container w3-margin-bottom">
-        <img src="/w3images/p1.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
-        <div class="w3-container w3-white">
-          <p><b>Lorem Ipsum</b></p>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+    {% for tea in tealist %}
+  
+      <div class="w3-third w3-container  w3-center w3-margin-bottom"><a href="/writing/order">
+        <img src="{{tea.mimg_path}}" alt="tea" style="width:60%" class="w3-hover-opacity"></a>
+        <div class="w3-container w3-white" style="height:100px">
+          <p><b>{{tea.mName}}</b></p>
+          <p style="overflow:hidden; word-break: break-word; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical">{{tea.explain}}</p>
         </div>
       </div>
-      <div class="w3-third w3-container w3-margin-bottom">
-        <img src="/w3images/p2.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
-        <div class="w3-container w3-white">
-          <p><b>Lorem Ipsum</b></p>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+  
+    {% endfor %}
+  
+    </div>
+
+    <div id="Beverage" class="w3-row-padding city">
+  
+      {% for beverage in beveragelist %}
+    
+        <div class="w3-third w3-container  w3-center w3-margin-bottom"><a href="/writing/order">
+          <img src="{{beverage.mimg_path}}" alt="tea" style="width:60%" class="w3-hover-opacity"></a>
+          <div class="w3-container w3-white" style="height:100px">
+            <p><b>{{beverage.mName}}</b></p>
+            <p style="overflow:hidden; word-break: break-word; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical">{{beverage.explain}}</p>
+          </div>
         </div>
-      </div>
-      <div class="w3-third w3-container">
-        <img src="/w3images/p3.jpg" alt="Norway" style="width:60%" class="w3-hover-opacity">
-        <div class="w3-container w3-white">
-          <p><b>Lorem Ipsum</b></p>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-        </div>
-      </div>
+    
+      {% endfor %}
+    
     </div>
 
   <!-- Pagination -->
@@ -244,6 +216,20 @@ function  inputcheck(f) {
   function win_upload(){
     var op = "width=500,height=150,left=50, top=150";
     open("../../picture/","",op);
+  }
+
+  function openCity(evt, cityName) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " w3-red";
   }
 </script>
 
