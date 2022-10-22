@@ -34,7 +34,7 @@ class FaceRecognition:
             ret, img = cam.read()
             # img = cv2.flip(img, -1) # flip video image vertically
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            faces = detector.detectMultiScale(gray, 1.3, 5)
+            faces = detector.detectMultiScale(gray, 1.3, 3)
 
             for (x,y,w,h) in faces:
 
@@ -116,8 +116,8 @@ class FaceRecognition:
 
             faces = faceCascade.detectMultiScale( 
                 gray,
-                scaleFactor = 1.2,
-                minNeighbors = 5,
+                scaleFactor = 1.3,
+                minNeighbors = 3,
                 minSize = (int(minW), int(minH)),
             )
 
@@ -141,7 +141,7 @@ class FaceRecognition:
             k = cv2.waitKey(10) & 0xff # Press 'ESC' for exiting video
             if k == 27:
                 break
-            if confidence > 50:
+            if confidence > 60:
                 break
 
         print("\n Exiting Program")

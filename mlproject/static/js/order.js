@@ -28432,6 +28432,7 @@ function recognize() {
   copyCtx.scale(scaling, scaling);
   copyCtx.translate(-canvas.width / 2, -canvas.height / 2);
   copyCtx.translate(trans.transX, trans.transY);
+  
 
   if (document.getElementById("scaleStrokeWidth").checked == true) {
     for (var p = 0; p < paths.length; p++) {
@@ -28489,9 +28490,26 @@ function recognize() {
   });
   console.log("maxIndex: " + maxIndex);
   document.getElementById("nnOut").innerHTML = maxIndex;
+  document.getElementById("ck_order").innerHTML = maxIndex;
   clearBeforeDraw = true;
   var dt = new Date() - t1;
   console.log("recognize time: " + dt + "ms");
+
+  //alert로 주문사항 확인
+   
+ /*setTimeout(e, 1000);
+
+  function e(){
+    var result = confirm(maxIndex + "개 주문 맞습니까?");
+    if(result == true) {
+      alert("확인 되었습니다.");
+      console.log(result)
+    }else{
+      alert("취소 되었습니다.");
+    }
+  }
+   */
+
 }
 
 function init() {
@@ -28527,6 +28545,7 @@ function init() {
     false
   );
 }
+
 // draws a line from (x1, y1) to (x2, y2) with nice rounded caps
 function draw(ctx, color, lineWidth, x1, y1, x2, y2) {
   ctx.beginPath();
@@ -28539,6 +28558,7 @@ function draw(ctx, color, lineWidth, x1, y1, x2, y2) {
   ctx.stroke();
   ctx.closePath();
 }
+
 function erase() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   document.getElementById("nnOut").innerHTML = "";

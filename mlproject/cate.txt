@@ -1,0 +1,2 @@
+INSERT INTO menu_category (cateNo,cName) VALUES
+(10,'COFFEE'),(20,'BEVERAGE'),(30,'TEA');
