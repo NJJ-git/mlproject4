@@ -24,14 +24,13 @@ recognition.onresult = function(e) {
 	p = speechMsg    //입력된 음성 text
 };
 
-window.addEventListener("click", function(e) {
+window.addEventListener('load', function(e) {
 	//	var t = e.target;
 	//	var input = t.previousElementSibling;
 	greet();
 	startchat = true;
 	userName=null;
 	recognition.start();
-	speech('음성 주문을 시작합니다 ');
 });
 
 
