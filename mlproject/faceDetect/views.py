@@ -45,11 +45,10 @@ def login(request):
     # id1 = request.POST.get('face_id')
     # print(id1)
     try:
-        uid = UserProfile.objects.get(face_id=user_id)
-        print(uid.face_id)
-        if user_id == uid.face_id :
+        user = UserProfile.objects.get(face_id=user_id)
+        print(user.face_id)
+        if user_id == user.face_id:
             # session_id=UserProfile.objects.get(face_id=user_id)
-            # print(session_id)
             request.session['login'] = user_id
             # print("session의 face_id: "+str_id))
             return redirect('greeting', str(user_id))
