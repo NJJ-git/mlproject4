@@ -7,6 +7,7 @@
   </head>
   <body>
     {% block content %}
+    {% if request.session.login %}
     <h3>{{user.name}} 님! EZ ORDER에 오신 것을 환영합니다.</h3>
     <div class="w3-container">
       <button
@@ -22,6 +23,15 @@
         터치로 주문하기
       </button>
     </div>
+    {% else %}
+    <h3>로그인을 해주세요!</h3>
+    <div class="w3-container">
+      <button
+        onclick="location.href='/faceDetect'"
+        class="w3-button w3-block w3-black w3-ripple"
+      >로그인 하러 가기</button>
+    </div>
+    {% endif %}
     {% endblock %}
   </body>
 </html>
